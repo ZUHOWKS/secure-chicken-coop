@@ -50,33 +50,38 @@ if __name__ == "__main__":
     pi_camera = Picam.getCamera()
     on_magnets = True
     was_magnet_disabled = False
+    try:
+        while True:
 
-    while True:
+            movementDetected = True  # TODO: MOVEMENT DETECTION
 
-        movementDetected = True  # TODO: MOVEMENT DETECTION
+            if movementDetected:
+                print(prefix, "Movement has been detected !")
+                print(prefix, "Enabling magnets...")
+                on_magnets = True
 
-        if movementDetected:
-            print(prefix, "Movement has been detected !")
-            print(prefix, "Enabling magnets...")
-            on_magnets = True
+                # TODO: ACTIVATE MAGNETS IF IT WAS DISABLED
+                print(prefix, "Open checking session...")
+                print(prefix, "Starting camera...")
+                pi_camera.start()
+                time.sleep(2)
+                print(prefix, "Camera enabled !")
 
-            # TODO: ACTIVATE MAGNETS IF IT WAS DISABLED
-            print(prefix, "Open checking session...")
-            print(prefix, "Starting camera...")
-            pi_camera.start()
-            time.sleep(2)
-            print(prefix, "Camera enabled !")
+                chickenIsPresent = openCheckingSession(model, capture_loc)
+                if chickenIsPresent:
+                    print(prefix, "Chicken presence has been detected.")
+                    # TODO: STOP MAGNETS
+                    on_magnets = False
+                    print(prefix, "Disabling Magnets...")
+                else:
+                    print(prefix, "Any chicken has been detected.")
 
-            chickenIsPresent = openCheckingSession(model, capture_loc)
-            if chickenIsPresent:
-                print(prefix, "Chicken presence has been detected.")
-                # TODO: STOP MAGNETS
-                on_magnets = False
-                print(prefix, "Disabling Magnets...")
-            else:
-                print(prefix, "Any chicken has been detected.")
+                print(prefix, "Stopping camera...")
+                pi_camera.stop()
+                print(prefix, "Checking session has been closed.")
+                time.sleep(10)
 
-            print(prefix, "Stopping camera...")
-            pi_camera.stop()
-            print(prefix, "Checking session has been closed.")
-            time.sleep(10)
+    except KeyboardInterrupt:
+        print(prefix, "Stopping Secure Chicken Coop...")
+        pi_camera.stop()
+        print(prefix, "Secure Chicken Coop has been stopped successfully !")
