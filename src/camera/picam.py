@@ -1,9 +1,10 @@
 from picamera2 import Picamera2, Preview
 import os
-from ..main import prefix
 
 
 def getCamera():
+    prefix = "SCC-INFO: "
+
     print(prefix, "Configuration of the camera...")
     picam = Picamera2()
     print(prefix, "Applying preview configuration...")
