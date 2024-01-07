@@ -3,6 +3,10 @@ from camera import picam as Picam
 from parameters import *
 import time
 
+
+print(ia_model_file)
+print(capture_loc)
+
 # Constants
 model = ChickenDetection.getIAModel(ia_model_file)
 pi_camera = Picam.getCamera()
