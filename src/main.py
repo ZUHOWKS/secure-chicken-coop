@@ -64,7 +64,7 @@ if __name__ == "__main__":
                 print(prefix, "Open checking session...")
                 print(prefix, "Starting camera...")
                 pi_camera.start()
-                time.sleep(2)
+                time.sleep(3)
                 print(prefix, "Camera enabled !")
 
                 chickenIsPresent = openCheckingSession(model, capture_loc)
@@ -83,5 +83,8 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print(prefix, "Stopping Secure Chicken Coop...")
-        pi_camera.stop()
+        try:
+            pi_camera.stop()
+        except Exception as e:
+            print(prefix, "ERROR: ", e)
         print(prefix, "Secure Chicken Coop has been stopped successfully !")
