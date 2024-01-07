@@ -27,7 +27,24 @@ def openCheckingSession(model, capture_loc):
 
 # Main Execute
 if __name__ == "__main__":
+    print("\n\n\n\n\n\n")
 
+    print("##########################################\n"
+          "#    #########    ########    ########   #\n"
+          "#   ####        ###         ###          #\n"
+          "#   ##         ##          ##            #\n"
+          "#    #####     ##          ##            #\n"
+          "#     #####    ##          ##            #\n"
+          "#        ##     ###         ###          #\n"
+          "#  #######        ########    ########   #\n"
+          "##########################################\n")
+
+    print("\nSecure Chicken Coop by ZUHOWKS & Majurax")
+    print("All right reserved to ZUHOWKS & Majurax to deliver SCC code.")
+
+    time.sleep(1)
+
+    print("\n", prefix, "Starting Secure Chicken Coop...")
     # Global SCC variable
     model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
     pi_camera = Picam.getCamera()
