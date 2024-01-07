@@ -12,7 +12,9 @@ pi_camera = Picam.getCamera()
 pi_camera.start()
 
 time.sleep(2)
+# TODO: While loop
 pi_camera.capture_file(os.path.abspath(capture_loc))
+time.sleep(2)
 pred = ChickenDetection.predicate(model, os.path.abspath(capture_loc))
 
 pi_camera.stop()
