@@ -18,5 +18,6 @@ def takeCapture(picam, img):
     try:
         picam.capture_file(os.path.abspath(img))
         return True
-    except:
+    except Exception as e:
+        print("Error: ", e)
         return False

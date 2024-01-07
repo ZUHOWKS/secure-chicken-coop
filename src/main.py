@@ -39,12 +39,12 @@ if __name__ == "__main__":
           "#  #######        ########    ########   #\n"
           "##########################################\n")
 
-    print("\nSecure Chicken Coop by ZUHOWKS & Majurax")
+    print("Secure Chicken Coop by ZUHOWKS & Majurax")
     print("All right reserved to ZUHOWKS & Majurax to deliver SCC code.")
 
     time.sleep(1)
-
-    print("\n", prefix, "Starting Secure Chicken Coop...")
+    print("\n")
+    print(prefix, "Starting Secure Chicken Coop...")
     # Global SCC variable
     model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
     pi_camera = Picam.getCamera()
