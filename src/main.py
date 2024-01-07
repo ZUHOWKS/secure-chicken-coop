@@ -23,9 +23,6 @@ def openCheckingSession(model, capture_loc):
         if Picam.takeCapture(pi_camera, capture_loc):
             pred = ChickenDetection.predicate(model, os.path.abspath(capture_loc))
             chicken_is_present = ChickenDetection.isChickenPredicated(pred)
-
-            if not chicken_is_present:
-                time.sleep(1)
         else:
             print(prefix, "Can't take picture.")
 
