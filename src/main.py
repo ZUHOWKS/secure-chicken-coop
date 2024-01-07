@@ -4,11 +4,7 @@ from parameters import *
 import time
 import os
 
-# Constants
-model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
-pi_camera = Picam.getCamera()
-on_magnets = True
-was_magnet_disabled = False
+
 prefix = "SCC-INFO: "
 
 
@@ -31,6 +27,13 @@ def openCheckingSession(model, capture_loc):
 
 # Main Execute
 if __name__ == "__main__":
+
+    # Global SCC variable
+    model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
+    pi_camera = Picam.getCamera()
+    on_magnets = True
+    was_magnet_disabled = False
+
     while True:
 
         movementDetected = True  # TODO: MOVEMENT DETECTION
