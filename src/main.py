@@ -19,6 +19,10 @@ def openCheckingSession(model, capture_loc):
         if Picam.takeCapture(pi_camera, capture_loc):
             pred = ChickenDetection.predicate(model, os.path.abspath(capture_loc))
             chicken_is_present = ChickenDetection.isChickenPredicated(pred)
+
+            if chicken_is_present:
+                return chicken_is_present
+
         else:
             print(prefix, "Can't take picture.")
 
@@ -79,7 +83,7 @@ if __name__ == "__main__":
                 print(prefix, "Stopping camera...")
                 pi_camera.stop()
                 print(prefix, "Checking session has been closed.")
-                time.sleep(10)
+                time.sleep(15)
 
     except KeyboardInterrupt:
         print(prefix, "Stopping Secure Chicken Coop...")
