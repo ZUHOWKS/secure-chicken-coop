@@ -3,9 +3,12 @@ from camera import picam as Picam
 from parameters import *
 import time
 import os
+import sys
 
-
+# SCC Console variable
 prefix = "SCC-INFO: "
+debug = False
+log = True
 
 
 # Main Function
@@ -47,7 +50,21 @@ if __name__ == "__main__":
     print("All right reserved to ZUHOWKS & Majurax to deliver SCC code.")
 
     time.sleep(1)
+
     print("\n")
+
+    for commandParam in sys.argv[1:]:
+        if commandParam == "-debug":
+            debug = True
+        elif commandParam == "-nolog":
+            log = False
+
+    if debug:
+        print(prefix, "Debugger mod has been enabled.")
+
+    if not log:
+        print(prefix, "Logs has been disabled.")
+
     print(prefix, "Starting Secure Chicken Coop...")
     # Global SCC variable
     model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
