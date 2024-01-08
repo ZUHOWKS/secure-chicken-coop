@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print("Stopping magnet...")
-        GPIO.output(17, GPIO.HIGH)
+        GPIO.output(17, GPIO.LOW)
         print("Magnet has been disabled.")
         time.sleep(2)
         print("Test of the movement senor has been close.")
