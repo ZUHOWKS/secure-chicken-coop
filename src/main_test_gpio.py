@@ -18,7 +18,7 @@ if __name__ == "__main__":
     PI_MAGNET_PIN = 17  # MOVEMENT SENSOR PIN
 
     GPIO.setup(PI_MOTION_CLICK_PIN, GPIO.IN)
-    GPIO.setup(PI_MOTION_CLICK_PIN, GPIO.OUT)
+    GPIO.setup(PI_MAGNET_PIN, GPIO.OUT)
 
     print("Testing movement sensor...")
     time.sleep(2)
