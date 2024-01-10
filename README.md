@@ -16,9 +16,9 @@ Cepdandant, il faut aussi installer sur l'environnement python native les librai
 
 ---
 
-# Execution
+## Execution
 
-Utiliser le script scc_start.sh ci-dessous pour le bon fonctionnement du programme:
+Utilisez le script scc_start.sh ci-dessous pour le bon fonctionnement du programme:
 ```sh
 cd
 source py-secure-chicken-coop/bin/activate # Virtual Python Environnement
