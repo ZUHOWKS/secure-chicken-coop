@@ -1,15 +1,11 @@
 from ia import chicken_detection as ChickenDetection
 from camera import picam as Picam
-from parameters import *
+import parameters
 from gpio import pigpio as PiGPIO
+from logger import scc_logger as SCCLogger
 import time
 import os
 import sys
-
-# SCC Console variable
-prefix = "SCC-INFO: "
-debug = False
-log = True
 
 
 # Main Function
@@ -18,20 +14,19 @@ def openCheckingSession(model, capture_loc):
     chicken_is_present = False
     while retry < 5 and not chicken_is_present:
         retry += 1
-        print(prefix, "Chicken presence verification retry ", str(retry), ".")
-        print(prefix, "Taking picture...")
+        SCCLogger.debug("Chicken presence verification retry " + str(retry) + ".")
+
         if Picam.takeCapture(pi_camera, capture_loc):
             pred = ChickenDetection.predicate(model, os.path.abspath(capture_loc))
             chicken_is_present = ChickenDetection.isChickenPredicated(pred)
 
-        else:
-            print(prefix, "Can't take picture.")
-
+    SCCLogger.debug("Chicken presence verification finished.")
     return chicken_is_present
 
 
 # Main Execute
 if __name__ == "__main__":
+    SCCLogger.setupSCCLogger(os.path.abspath(parameters.logs_loc), debug=parameters.debug)
     print("\n\n\n\n\n\n")
 
     print("##########################################\n"
@@ -44,8 +39,8 @@ if __name__ == "__main__":
           "#  #######        ########    ########   #\n"
           "##########################################\n")
 
-    print("Secure Chicken Coop by ZUHOWKS & Majurax")
-    print("All right reserved to ZUHOWKS & Majurax to deliver SCC code.")
+    SCCLogger.info("Secure Chicken Coop by ZUHOWKS & Majurax")
+    SCCLogger.info("All right reserved to ZUHOWKS & Majurax to deliver SCC code.")
 
     time.sleep(1)
 
@@ -54,22 +49,20 @@ if __name__ == "__main__":
     for commandParam in sys.argv[1:]:
         if commandParam == "-debug":
             debug = True
-        elif commandParam == "-nolog":
-            log = False
 
-    if debug:
-        print(prefix, "Debugger mod has been enabled.")
+    if parameters.debug:
+        SCCLogger.debug("Debugger mod has been enabled.")
 
-    if not log:
-        print(prefix, "Logs has been disabled.")
+    if not parameters.log:
+        SCCLogger.info("Logs has been disabled.")
 
-    print(prefix, "Starting Secure Chicken Coop...")
+    SCCLogger.info("Starting Secure Chicken Coop...")
 
     # Global SCC variable
-    model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
+    model = ChickenDetection.getIAModel(os.path.abspath(parameters.ia_model_file))
     pi_camera = Picam.getCamera()
 
-    print(prefix, "Setup GPIO Raspberry Pi...")
+    SCCLogger.info("Setup GPIO Raspberry Pi...")
     PiGPIO.setup()
 
     try:
@@ -78,43 +71,44 @@ if __name__ == "__main__":
             movementDetected = PiGPIO.getMotionSensorInput()
 
             if movementDetected:
-                print(prefix, "Movement has been detected !")
-                print(prefix, "Enabling magnets...")
+                SCCLogger.info("Movement has been detected !")
+                SCCLogger.info("Enabling magnets...")
 
                 if not PiGPIO.isMagnetOn():
                     PiGPIO.activateMagnet()
 
-
-                print(prefix, "Open checking session...")
-                print(prefix, "Starting camera...")
+                SCCLogger.info("Open checking session...")
+                SCCLogger.info("Starting camera...")
                 pi_camera.start()
-                time.sleep(3)
-                print(prefix, "Camera enabled !")
 
-                chickenIsPresent = openCheckingSession(model, capture_loc)
+                time.sleep(3)
+                SCCLogger.info("Camera enabled !")
+
+                chickenIsPresent = openCheckingSession(model, parameters.capture_loc)
                 if chickenIsPresent:
-                    print(prefix, "Chicken presence has been detected.")
+                    SCCLogger.info("Chicken presence has been detected.")
                     if PiGPIO.isMagnetOn():
                         PiGPIO.disableMagnet()
 
-                    print(prefix, "Disabling Magnets...")
+                    SCCLogger.info("Disabling Magnets...")
                 else:
-                    print(prefix, "Any chicken has been detected.")
+                    SCCLogger.info("Any chicken has been detected.")
 
-                print(prefix, "Stopping camera...")
+                SCCLogger.info("Stopping camera...")
                 pi_camera.stop()
-                print(prefix, "Checking session has been closed.")
+                SCCLogger.info("Checking session has been closed.")
                 time.sleep(15)
 
             else:
                 PiGPIO.disableMagnet()
 
     except KeyboardInterrupt:
-        print(prefix, "Stopping Secure Chicken Coop...")
+        SCCLogger.info("Stopping Secure Chicken Coop...")
         try:
+            SCCLogger.info("Stopping camera...")
             pi_camera.stop()
         except Exception as e:
-            print(prefix, "ERROR: ", e)
-        print(prefix, "Clean GPIO Raspberry Pi...")
+            SCCLogger.fatal(e)
+        SCCLogger.info("Clean GPIO Raspberry Pi...")
         PiGPIO.clean()
-        print(prefix, "Secure Chicken Coop has been stopped successfully !")
+        SCCLogger.info("Secure Chicken Coop has been stopped successfully !")

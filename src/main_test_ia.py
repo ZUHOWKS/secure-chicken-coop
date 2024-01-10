@@ -13,6 +13,7 @@ if __name__ == "__main__":
           "#  #######        ########    ########   #\n"
           "##########################################\n")
 
+
     model = ChickenDetection.getIAModel(os.path.abspath(ia_model_file))
     pred = ChickenDetection.predicate(model, os.path.abspath(chicken_test))
 

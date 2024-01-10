@@ -3,23 +3,17 @@ import os
 from datetime import datetime
 
 
-def setupSCCLogger(log_file, debug=False, log=True):
+def setupSCCLogger(log_file, debug=False):
     if debug:
         logging.basicConfig(filename=log_file,
                             level=logging.DEBUG,
                             filemode="a",
                             datefmt='%m-%d-%Y %I:%M:%S-%p',
                             format='[%(asctime)s-DEBUGGER]%(message)s')
-    elif log:
+    else:
         logging.basicConfig(filename=log_file,
                             level=logging.INFO,
                             filemode="a",
-                            datefmt='%m-%d-%Y %I:%M:%S %p',
-                            format='[%(asctime)s]%(message)s')
-    else:
-        logging.basicConfig(filename=log_file,
-                            level=logging.WARNING,
-                            filemode="r",
                             datefmt='%m-%d-%Y %I:%M:%S %p',
                             format='[%(asctime)s]%(message)s')
 

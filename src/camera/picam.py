@@ -1,23 +1,29 @@
 from picamera2 import Picamera2, Preview
+from src.logger import scc_logger as SCCLogger
 import os
 
 
 def getCamera():
-    prefix = "SCC-INFO: "
 
-    print(prefix, "Configuration of the camera...")
+    SCCLogger.debug("Configuration of the camera...")
     picam = Picamera2()
-    print(prefix, "Applying preview configuration...")
+    
+    SCCLogger.debug("Applying preview configuration...")
     camera_config = picam.create_preview_configuration()
+    
     picam.configure(camera_config)
-    print(prefix, "Camera has been configured successfully")
+    SCCLogger.debug("Camera has been configured successfully.")
+    
     return picam
 
 
 def takeCapture(picam, img):
     try:
+        SCCLogger.debug("Capturing image...")
         picam.capture_file(os.path.abspath(img))
+        SCCLogger.debug("Capture has been taken successfully.")
         return True
     except Exception as e:
-        print("Error: ", e)
+        SCCLogger.fatal("Capture has been not taken.")
+        SCCLogger.fatal(str(e))
         return False
