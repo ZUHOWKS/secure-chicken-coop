@@ -1,5 +1,5 @@
 # Secure Chicken Coop
-Ce projet vise à créer un alogrithme capable de contrôler les composants électroniques du le Raspberry Pi couplés avec la puissance d'une intélligence artificielle. 
+Ce projet vise à créer un alogrithme capable de contrôler les composants électroniques du Raspberry Pi couplés avec la puissance d'une intélligence artificielle. 
 L'exploitation de la force de cette IA (Chicken Detection) nous permet, à l'aide de la Raspberry Pi Camera V2, efficacement d'identifier la présence
 d'un élèment en mouvement.
 
