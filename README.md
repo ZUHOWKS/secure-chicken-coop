@@ -18,4 +18,10 @@ Cepdandant, il faut aussi installer sur l'environnement python native les librai
 
 # Execution
 
-Utiliser le script scc_start.sh ci-dessous pour le bon fonctionnement du programme.
+Utiliser le script scc_start.sh ci-dessous pour le bon fonctionnement du programme:
+```sh
+cd
+source py-secure-chicken-coop/bin/activate # Virtual Python Environnement
+cd file/path/to/secure-chicken-coop/
+python3 src/main.py
+```
