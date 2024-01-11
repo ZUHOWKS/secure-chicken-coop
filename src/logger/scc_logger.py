@@ -4,6 +4,9 @@ from datetime import datetime
 
 
 def setupSCCLogger(log_file, debug=False):
+    file = open(log_file, "w")
+    file.write(" ")
+    file.close()
     if debug:
         logging.basicConfig(filename=log_file,
                             level=logging.DEBUG,
