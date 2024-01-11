@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-from src.logger import scc_logger as SCCLogger
+from logger import scc_logger as SCCLogger
 
 PI_MOTION_CLICK_PIN = 22  # MOVEMENT SENSOR PIN
 PI_MAGNET_PIN = 17  # MOVEMENT SENSOR PIN

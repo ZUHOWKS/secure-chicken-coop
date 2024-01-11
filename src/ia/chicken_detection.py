@@ -1,5 +1,5 @@
 import pickle
-from src.logger import scc_logger as SCCLogger
+from logger import scc_logger as SCCLogger
 
 
 def getIAModel(src):

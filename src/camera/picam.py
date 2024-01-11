@@ -1,5 +1,5 @@
 from picamera2 import Picamera2, Preview
-from src.logger import scc_logger as SCCLogger
+from logger import scc_logger as SCCLogger
 import os
 
 
