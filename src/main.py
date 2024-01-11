@@ -26,7 +26,7 @@ def openCheckingSession(model, capture_loc):
 
 # Main Execute
 if __name__ == "__main__":
-    SCCLogger.setupSCCLogger(os.path.abspath(parameters.logs_loc), debug=parameters.debug)
+    SCCLogger.setupSCCLogger(os.path.abspath(parameters.logs_loc).replace(":", "-"), debug=parameters.debug)
     print("\n\n\n\n\n\n")
 
     print("##########################################\n"
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     SCCLogger.info("Starting Secure Chicken Coop...")
 
     # Global SCC variable
-    model = ChickenDetection.getIAModel(os.path.abspath(parameters.ia_model_file).replace(":", "-"))
+    model = ChickenDetection.getIAModel(os.path.abspath(parameters.ia_model_file))
     pi_camera = Picam.getCamera()
 
     SCCLogger.info("Setup GPIO Raspberry Pi...")
