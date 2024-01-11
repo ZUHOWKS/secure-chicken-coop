@@ -59,7 +59,7 @@ if __name__ == "__main__":
     SCCLogger.info("Starting Secure Chicken Coop...")
 
     # Global SCC variable
-    model = ChickenDetection.getIAModel(os.path.abspath(parameters.ia_model_file))
+    model = ChickenDetection.getIAModel(os.path.abspath(parameters.ia_model_file).replace(":", "-"))
     pi_camera = Picam.getCamera()
 
     SCCLogger.info("Setup GPIO Raspberry Pi...")
